@@ -8,10 +8,9 @@ import User from '../dbs/models/users'
 //导入接口
 import Passport from './utils/passport'
 import Email from '../dbs/config'
-import Axios from './utils/axios'
-
+import axios from './utils/axios'
 let router =  new Router({ prefix: '/users' });
-let Store = new Redis().client;
+let Store = new  Rides().client;
 
 //注册接口
 router.post('/signup', async (ctx) => {
@@ -130,6 +129,49 @@ router.post('/verify',async(ctx,next)=>{
 		to: ko.email,
 		subject: '《慕课网高仿美团网全栈实战》注册码',
 		html: `您在《慕课网高仿美团网全栈实战》课程中注册，您的邀请码是${ko.code}`
-	}
+  }
+  await transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      return console.log(error)
+    } else {
+      Store.hmset(`nodemail:${ko.user}`, 'code', ko.code, 'expire', ko.expire, 'email', ko.email)
+    }
+  })
+  ctx.body = {
+    code: 0,
+    msg: '验证码已发送，可能会有延时，有效期1分钟'
+  }
 
 })
+
+//账号退出
+router.get('/exit', async (ctx, next) => {
+  await ctx.logout()
+  if (!ctx.isAuthenticated()) {
+    ctx.body = {
+      code: 0
+    }
+  } else {
+    ctx.body = {
+      code: -1
+    }
+  }
+})
+
+//用户登录状态
+router.get('/getUser', async (ctx) => {
+  if (ctx.isAuthenticated()) {
+    const {username, email} = ctx.session.passport.user
+    ctx.body={
+      user:username,
+      email
+    }
+  }else{
+    ctx.body={
+      user:'',
+      email:''
+    }
+  }
+})
+
+export default router

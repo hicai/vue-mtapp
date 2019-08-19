@@ -3,6 +3,19 @@ import Koa from 'Koa'
 const consola = require('consola')
 const { Nuxt, Builder } = require('nuxt')
 
+// import mongoose from 'mongoose'
+// import bodyParser from 'koa-bodyparser'
+
+// //处理登录状态
+// import session from 'koa-generic-session'
+// import Redis from 'koa-redis'
+// //处理json格式 美观效果
+// import Json from 'koa-json'
+// //导入数据库配置
+// import dbConfig from './dbs/config'
+// import passport from './interface/utils/passport'
+// import users from './interface/users'
+
 const app = new Koa()
 
 // Import and Set Nuxt.js options
@@ -17,6 +30,8 @@ async function start() {
     host = process.env.HOST || '127.0.0.1',
     port = process.env.PORT || 3000
   } = nuxt.options.server
+
+
 
   // Build in development
   if (config.dev) {
