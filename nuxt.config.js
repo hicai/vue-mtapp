@@ -37,6 +37,7 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/axios' //全局引用模块
   ],
   /*
   ** Build configuration
