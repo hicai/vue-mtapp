@@ -29,6 +29,7 @@ app.use(bodyParser({
 }))
 app.use(json())
 
+
 // 连数据库
 mongoose.connect(dbConfig.dbs, {
   useNewUrlParser: true
@@ -36,7 +37,6 @@ mongoose.connect(dbConfig.dbs, {
 //处理登录相关
 app.use(passport.initialize())
 app.use(passport.session())
-
 
 // Import and Set Nuxt.js options
 let config = require('../nuxt.config.js')
@@ -51,8 +51,6 @@ async function start() {
     const builder = new Builder(nuxt)
     await builder.build()
   }
-
-
 
   app.use(users.routes()).use(users.allowedMethods())
   app.use(ctx => {
