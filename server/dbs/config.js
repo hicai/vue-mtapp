@@ -25,7 +25,7 @@ export default{
         },
         get expire(){  //验证码过期时间
             return () => {
-              return new Date().getTime() + 60*6*1000
+              return new Date().getTime() + 60*1000
             }
         }
     }
