@@ -182,7 +182,7 @@ import CryptoJS from 'crypto-js'
                     }else{
                         self.error = `服务器出错，错误码${status}`
                      }
-                     //定时清空
+                     //定时清空xxxxxxxxxxxx
                      setTimeout(function(){
                        self.errpr = ''
                      },1000)
