@@ -6,10 +6,9 @@ import Passport from './utils/passport'
 import Email from '../dbs/config'
 import axios from './utils/axios'
 
-let router = new Router({ prefix: '/users' })
+let router = new Router({prefix: '/users'})
 
 let Store = new Redis().client
-
 
 router.post('/signup', async (ctx) => {
   const {username, password, email, code} = ctx.request.body;
@@ -44,8 +43,8 @@ router.post('/signup', async (ctx) => {
       msg: '已被注册'
     }
     return
-	}
-	let nuser = await User.create({username, password, email})
+  }
+  let nuser = await User.create({username, password, email})
   if (nuser) {
     let res = await axios.post('/users/signin', {username, password})
     if (res.data && res.data.code === 0) {
@@ -126,10 +125,7 @@ router.post('/verify', async (ctx, next) => {
     if (error) {
       return console.log(error)
     } else {
-      // Store.hmset(`nodemail:${ko.user}`, 'code', ko.code, 'expire', ko.expire, 'email', ko.email)
-      Store.hset(`nodemail:${username}`,'code',ko.code)
-      Store.hset(`nodemail:${username}`,'expire',ko.expire)
-      Store.hset(`nodemail:${username}`,'email',ko.email)
+      Store.hmset(`nodemail:${ko.user}`, 'code', ko.code, 'expire', ko.expire, 'email', ko.email)
     }
   })
   ctx.body = {

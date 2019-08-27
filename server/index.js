@@ -23,12 +23,11 @@ const port = process.env.PORT || 3000
 // 配置
 app.keys = ['mt', 'keyskeys']
 app.proxy = true
-app.use(session({ key: 'mt', prefix: 'mt:uid', store: new Redis() }))
+app.use(session({key: 'mt', prefix: 'mt:uid', store: new Redis()}))
 app.use(bodyParser({
-  extendTypes: ['json', 'form', 'text']
+  extendTypes:['json','form','text']
 }))
 app.use(json())
-
 
 // 连数据库
 mongoose.connect(dbConfig.dbs, {
@@ -37,6 +36,7 @@ mongoose.connect(dbConfig.dbs, {
 //处理登录相关
 app.use(passport.initialize())
 app.use(passport.session())
+
 
 // Import and Set Nuxt.js options
 let config = require('../nuxt.config.js')
@@ -51,6 +51,7 @@ async function start() {
     const builder = new Builder(nuxt)
     await builder.build()
   }
+
 
   app.use(users.routes()).use(users.allowedMethods())
   app.use(ctx => {
