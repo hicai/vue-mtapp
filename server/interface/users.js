@@ -9,6 +9,7 @@ import axios from './utils/axios'
 let router = new Router({prefix: '/users'})
 let Store = new Redis().client
 
+//验证接口
 router.post('/signup', async (ctx) => {
   const {username, password, email, code} = ctx.request.body;
 
@@ -66,6 +67,7 @@ router.post('/signup', async (ctx) => {
   }
 })
 
+//登录接口
 router.post('/signin', async (ctx, next) => {
   return Passport.authenticate('local', function(err, user, info, status) {
     if (err) {
@@ -91,6 +93,7 @@ router.post('/signin', async (ctx, next) => {
   })(ctx, next)
 })
 
+//邮箱验证接口
 router.post('/verify', async (ctx, next) => {
   let username = ctx.request.body.username
   const saveExpire = await Store.hget(`nodemail:${username}`, 'expire')
@@ -133,6 +136,7 @@ router.post('/verify', async (ctx, next) => {
   }
 })
 
+//退出接口
 router.get('/exit', async (ctx, next) => {
   await ctx.logout()
   if (!ctx.isAuthenticated()) {
@@ -146,6 +150,7 @@ router.get('/exit', async (ctx, next) => {
   }
 })
 
+//用户详情
 router.get('/getUser', async (ctx) => {
   if (ctx.isAuthenticated()) {
     const {username, email} = ctx.session.passport.user

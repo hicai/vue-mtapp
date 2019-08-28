@@ -1,9 +1,10 @@
 import Router from 'koa-router';
 import axios from './utils/axios'
-import Province from '../dbs/models/province'
+// import Province from '../dbs/models/province'
 
 let router = new Router({prefix: '/geo'})
 
+//根据ip获取当前城市定位
 router.get('/getPostiion',async(ctx)=>{
     let {
       status,
