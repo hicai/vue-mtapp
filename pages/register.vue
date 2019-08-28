@@ -176,6 +176,7 @@ import CryptoJS from 'crypto-js'
                     if(status === 200){
                       if(data && data.code === 0){
                        self.$router.push('/login')
+                       this.$refs['ruleForm'].resetFields(); //移除校验结果并重置字段值
                       }else{
                         self.error = data.msg
                       }
@@ -195,5 +196,5 @@ import CryptoJS from 'crypto-js'
 </script>
 
 <style lang="scss">
-   @import '@/assets/css/register/index.scss'
+@import "@/assets/css/register/index.scss";
 </style>

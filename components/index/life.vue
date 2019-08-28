@@ -19,7 +19,7 @@
 							</nuxt-link>							
 						</div>
             <div>
-						<nuxt-link to="">
+						<nuxt-link to="/login">
 							<el-button size="medium">立即登录</el-button>
 						</nuxt-link>	
             </div>					

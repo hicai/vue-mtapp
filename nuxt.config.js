@@ -31,7 +31,7 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '@/plugins/element-ui'
+    {src:'@/plugins/element-ui',ssr:true}
   ],
   /*
   ** Nuxt.js modules
@@ -47,6 +47,8 @@ module.exports = {
   },
   build: {
     transpile: [/^element-ui/],
+    // 防止element-ui被多次打包
+    vendor: ['element-ui'],
     /*
     ** You can extend webpack config here
     */

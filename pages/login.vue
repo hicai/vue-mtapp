@@ -6,10 +6,23 @@
         class="logo"/>
       </div>     
     <div class="form">
+      <h4
+        v-if="error"
+        class="tips"><i/>{{ error }}</h4>
       <p>账号登陆</p>
-      <el-input v-model="username" placeholder="请输入用户名"></el-input>
+      <el-input 
+        v-model="username" 
+        prefix-icon="el-icon-user"
+        autocomplete="off"
+        placeholder="请输入用户名"
+        ></el-input>
       <p>密码</p>
-       <el-input v-model="password" placeholder="请输入密码"></el-input>
+       <el-input
+          v-model="password"
+          prefix-icon="el-icon-lock"
+          autocomplete="off"
+           placeholder="请输入密码"
+          show-password></el-input>
        <div class="remember">
         <el-checkbox v-model="checked">7天内自动登录</el-checkbox>
         <span>忘记密码？</span>
@@ -23,7 +36,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import CryptoJS from 'crypto-js'
 export default {
@@ -38,19 +50,20 @@ export default {
   },
   methods: {
       login(){
-         let self = this;
          this.$axios.post("/users/signin",{
             username:window.encodeURIComponent(this.username),
             password:CryptoJS.MD5(this.password).toString()
          }).then(res=>{
-             if(status === 2000){
+             if(res.status === 200){
                if(res.data && res.data.code === 0){
-                   self.$router.push('/')
+                   this.$router.push('/')
+                   this.username = ""
+                   this.password = ""
                }else{
-                   self.error = res.data.msg
+                   this.error = res.data.msg
                }
              }else{
-                self.error=`服务器出错`   
+                this.error=`服务器出错`   
              }
          })
 
@@ -59,15 +72,9 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
   @import "@/assets/css/login/index.scss"; 
  .page-login{
-    // position: fixed;
-    //  width: 100%;
-    //  height: 100%;
-    //  background: linear-gradient(141deg, #89e6dd 0%, #32ccbc 51%, #2bb8aa 75%);
-    //  top:0;
-    //  left: 0;
       .form{
           background: #fff;
           width: 300px;
