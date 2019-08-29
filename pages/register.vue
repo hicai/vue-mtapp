@@ -129,7 +129,7 @@ data() {
             const self = this;
             let namePass
             let emailPass
-            if (timerid) {
+            if (self.timerid) {
               return false
             }
             this.$refs['ruleForm'].validateField('name', (valid) => {
@@ -153,10 +153,10 @@ data() {
                 if (status === 200 && data && data.code === 0) {
                   let count = 10;
                   self.statusMsg = `验证码已发送,剩余${count--}秒`
-                  let timerid = setInterval(function () {
+                   self.timerid = setInterval(function () {
                     self.statusMsg = `验证码已发送,剩余${count--}秒`
                     if (count === 0) {
-                      clearInterval(timerid)
+                      clearInterval(self.timerid)
                       // self.statusMsg = ''
                       // timerid = null
                     }
