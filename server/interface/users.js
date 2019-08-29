@@ -13,7 +13,6 @@ let Store = new Redis().client
 
 router.post('/signup', async (ctx) => {
   const {username, password, email, code} = ctx.request.body;
-
   if (code) {
     const saveCode = await Store.hget(`nodemail:${username}`, 'code')
     const saveExpire = await Store.hget(`nodemail:${username}`, 'expire')
@@ -126,10 +125,10 @@ router.post('/verify', async (ctx, next) => {
     if (error) {
       return console.log(error)
     } else {
-      // Store.hmset(`nodemail:${ko.user}`, 'code', ko.code, 'expire', ko.expire, 'email', ko.email)
-      Store.hset(`nodemail:${username}`,'code',ko.code)
-      Store.hset(`nodemail:${username}`,'expire',ko.expire)
-      Store.hset(`nodemail:${username}`,'email',ko.email)
+      Store.hmset(`nodemail:${ko.user}`, 'code', ko.code, 'expire', ko.expire, 'email', ko.email)
+      // Store.hset(`nodemail:${username}`,'code',ko.code)
+      // Store.hset(`nodemail:${username}`,'expire',ko.expire)
+      // Store.hset(`nodemail:${username}`,'email',ko.email)
     }
   })
   ctx.body = {
@@ -141,7 +140,7 @@ router.post('/verify', async (ctx, next) => {
 router.get('/exit', async (ctx, next) => {
   await ctx.logout()
   if (!ctx.isAuthenticated()) {
-    ctx.body = {
+    ctx.body = { 
       code: 0
     }
   } else {
