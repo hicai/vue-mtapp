@@ -1,16 +1,15 @@
 import Router from 'koa-router';
 import Redis from 'koa-redis'
 import nodeMailer from 'nodemailer'
-import User from '../dbs/models/users'
+import User from '../dbs/models/users' 
 import Passport from './utils/passport'
 import Email from '../dbs/config'
 import axios from './utils/axios'
 
-let router = new Router({ prefix: '/users' })
-
+let router = new Router({prefix: '/users'})
 let Store = new Redis().client
 
-
+//验证接口
 router.post('/signup', async (ctx) => {
   const {username, password, email, code} = ctx.request.body;
   if (code) {
@@ -43,8 +42,8 @@ router.post('/signup', async (ctx) => {
       msg: '已被注册'
     }
     return
-	}
-	let nuser = await User.create({username, password, email})
+  }
+  let nuser = await User.create({username, password, email})
   if (nuser) {
     let res = await axios.post('/users/signin', {username, password})
     if (res.data && res.data.code === 0) {
@@ -67,6 +66,7 @@ router.post('/signup', async (ctx) => {
   }
 })
 
+//登录接口
 router.post('/signin', async (ctx, next) => {
   return Passport.authenticate('local', function(err, user, info, status) {
     if (err) {
@@ -92,6 +92,7 @@ router.post('/signin', async (ctx, next) => {
   })(ctx, next)
 })
 
+//邮箱验证接口
 router.post('/verify', async (ctx, next) => {
   let username = ctx.request.body.username
   const saveExpire = await Store.hget(`nodemail:${username}`, 'expire')
@@ -126,9 +127,7 @@ router.post('/verify', async (ctx, next) => {
       return console.log(error)
     } else {
       Store.hmset(`nodemail:${ko.user}`, 'code', ko.code, 'expire', ko.expire, 'email', ko.email)
-      // Store.hset(`nodemail:${username}`,'code',ko.code)
-      // Store.hset(`nodemail:${username}`,'expire',ko.expire)
-      // Store.hset(`nodemail:${username}`,'email',ko.email)
+
     }
   })
   ctx.body = {
@@ -137,6 +136,7 @@ router.post('/verify', async (ctx, next) => {
   }
 })
 
+//退出接口
 router.get('/exit', async (ctx, next) => {
   await ctx.logout()
   if (!ctx.isAuthenticated()) {
@@ -150,6 +150,7 @@ router.get('/exit', async (ctx, next) => {
   }
 })
 
+//用户详情
 router.get('/getUser', async (ctx) => {
   if (ctx.isAuthenticated()) {
     const {username, email} = ctx.session.passport.user

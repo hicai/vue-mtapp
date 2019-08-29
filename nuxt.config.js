@@ -14,7 +14,7 @@ module.exports = {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
-  },
+  }, 
   /*
   ** Customize the progress-bar color
   */
@@ -47,6 +47,8 @@ module.exports = {
   },
   build: {
     transpile: [/^element-ui/],
+    // 防止element-ui被多次打包
+    vendor: ['element-ui'],
     /*
     ** You can extend webpack config here
     */
