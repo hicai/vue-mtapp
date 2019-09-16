@@ -13,7 +13,7 @@ passport.use(new LocalStrategy(async function(username,password,done){
 		return done(null,result)
 	  }else{
 		return done(null,false,'密码错误')
-	  }
+	  }    
 	}else{
 	  return done(null,false,'用户不存在')
 	}
@@ -28,3 +28,4 @@ passport.use(new LocalStrategy(async function(username,password,done){
   })
   
   export default passport
+	//
