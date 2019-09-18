@@ -5,6 +5,7 @@ import Province from '../dbs/models/province'
 let router = new Router({prefix: '/geo'})
 
 //根据ip获取当前城市定位
+
 router.get('/getPosition',async(ctx)=>{ 
   let {
     status,
