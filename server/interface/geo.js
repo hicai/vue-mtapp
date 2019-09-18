@@ -27,4 +27,19 @@ router.get('/getPosition',async(ctx)=>{
   }
 })
 
+
+//菜单侧导航接口
+router.get('/menu', async(ctx)=>{
+  let {status,data:{menu}} = await axios.get(`http://cp-tools.cn/geo/menu`);
+    if(status === 200){
+      ctx.body = {
+        menu
+      }
+    }else{
+      ctx.body = {
+        menu:[]
+      } 
+    }
+})
+
 export default router;
