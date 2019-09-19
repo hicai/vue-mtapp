@@ -1,10 +1,6 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-Vue.use(Vuex)
-
 const state = () => ({position: {}})
 
-const mutations={
+const mutations = {
     setPosition(state,val){
     state.position = val
     }
