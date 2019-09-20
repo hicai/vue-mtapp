@@ -43,4 +43,20 @@ router.get('/menu', async(ctx)=>{
     }
 })
 
+//Geo接口
+router.get('/province',async(ctx)=>{
+  //本地数据库方法
+  let province = await Province.find()
+  ctx.body = {
+    province:province.map(item => {
+       return {
+         id : item.id,
+         name: item.value[0]
+       }
+    })
+  }
+})
+
+
+
 export default router;
