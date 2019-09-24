@@ -20,3 +20,9 @@ $ npm run generate
 ```
 
 For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
+
+
+#功能
+1.登录注册
+2.登录后返回当前城市定位
+3.全国城市根据拼音首字母分类
