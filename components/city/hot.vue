@@ -6,7 +6,7 @@
           v-for="item in hotCity"
           :key="item.id"
           >
-              {{item.name}}   
+              {{item.name==="市辖区"?item.province:item.name}}   
           </li> 
        </ul>
     </div>
@@ -30,7 +30,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import "@/assets/css/changeCity/hot.scss";
   .hot-city{
      overflow: hidden; 
      span{
