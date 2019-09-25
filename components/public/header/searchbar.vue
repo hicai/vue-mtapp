@@ -10,32 +10,32 @@
 			<el-col :span="16" class="center">
 			   <div class="wrapper">
 					 <el-input placeholder="输入搜索内容" v-model="search"
-					  @focus="focus"
+					    @focus="focus"
 						@blur="blur"
 						@input="input"
 					 >
             <el-button slot="append" icon="el-icon-search"></el-button>
 					 </el-input>
 					 <!-- 热门推荐 -->
-           <dl class="hotPlace" 
+            <dl class="hotPlace" 
 					     v-if="ifHotPlace">
-             <dt>热门搜索</dt>
+                    <dt>热门搜索</dt>
 						 <dd 
-						   v-for="(item,index) in HotPlaceList"
+						   v-for="(item,index) in $store.state.hot.hotPlace.slice(0,5)"
 							 :key="index"
 							 >
-						   {{item}}	 
+						   {{ item.neme }}	 
 						 </dd>
 						 
 					 </dl>
 					 <!-- 相关搜索 -->
-           <dl class="searchList"
+                  <dl class="searchList"
 				    	 v-if="ifSearchList">
 						 <dd 
-						   v-for="(item,index) in SearchList"
+						   v-for="(item,index) in searchList"
 							 :key="index"
 							 >
-						   {{item}}	 
+						   {{ item.name }}	 
 						 </dd>
 					 </dl>
 					 <!-- 菜单 -->
@@ -77,14 +77,15 @@
 </template>
 
 <script>
+import _ from 'lodash'
 export default {
 	name:'',
 	data(){
 	 return {
 		search:'',
 		ifFous:false,
-		HotPlaceList:['故宫','故宫','故宫'],
-		SearchList:['火锅','火锅','火锅']
+		hotPlace:[],
+		searchList:[]
 	 }
 	},
 	computed: {
@@ -96,22 +97,34 @@ export default {
 		}
 	},
 	methods: {
-		focus(){
+		focus:function(){
 			this.ifFous = true
 		},
-		blur(){
+		blur:function(){
 			let self = this;
 			setTimeout(() => {
 				self.ifFous = false
 			},200);	
 		},
-		input(){
-			console.log('input')
-		}
+		input:_.debounce(async function(){
+			 //_.debounce延迟操作,输入监听请求数据
+              let self = this;
+			  let city=self.$store.state.geo.position.city.replace('市','')
+			  self.searchList = []
+			  let {status,data:{top}} = await self.$axios.get('/search/top',{
+                 params:{
+					input: self.search,
+					city:city
+				 }
+			  }) 		 
+              self.searchList = top.slice(0,10)      
+		},200)
+		  
+ 
+
 	}
 }
 </script>
 
 <style lang="css">
-
 </style>

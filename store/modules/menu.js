@@ -1,4 +1,4 @@
-
+//geo接口ssr渲染
 const state = () => ({menu: []})
 
 const mutations = {
