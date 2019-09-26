@@ -8,8 +8,10 @@ import bodyParser from 'koa-bodyparser'
 //处理登录状态
 import session from 'koa-generic-session'
 import Redis from 'koa-redis'
+
 //处理json格式 美观效果
 import json from 'koa-json'
+
 //导入数据库配置
 import dbConfig from './dbs/config'
 import passport from './interface/utils/passport'

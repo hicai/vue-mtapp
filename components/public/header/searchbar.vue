@@ -21,15 +21,15 @@
 					     v-if="ifHotPlace">
                     <dt>热门搜索</dt>
 						 <dd 
-						   v-for="(item,index) in $store.state.hot.hotPlace.slice(0,5)"
-							 :key="index"
+						   v-for="(item,idx) in $store.state.hot.hotPlace.slice(0,4)"
+							 :key="idx"
 							 >
-						   {{ item.neme }}	 
+						   {{ item.name }}	 
 						 </dd>
 						 
 					 </dl>
 					 <!-- 相关搜索 -->
-                  <dl class="searchList"
+                     <dl class="searchList"
 				    	 v-if="ifSearchList">
 						 <dd 
 						   v-for="(item,index) in searchList"
@@ -41,11 +41,11 @@
 					 <!-- 菜单 -->
 				 </div>
 				 <p class="suggest">
-					 <a href="#">故宫博物院</a>
-					 <a href="#">故宫博物院</a>
-					 <a href="#">故宫博物院</a>
-					 <a href="#">故宫博物院</a>
-					 <a href="#">故宫博物院</a>
+					 <a href="#"
+					   v-for="(item,index) in $store.state.hot.hotPlace.slice(0,4)"
+					   :key = "index"
+					 >{{ item.name }}
+					 </a>
 				 </p>
 				  <ul class="nav">
           <li><nuxt-link
@@ -114,7 +114,7 @@ export default {
 			  let {status,data:{top}} = await self.$axios.get('/search/top',{
                  params:{
 					input: self.search,
-					city:city
+					city
 				 }
 			  }) 		 
               self.searchList = top.slice(0,10)      

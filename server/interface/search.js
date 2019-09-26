@@ -1,8 +1,9 @@
 import Router from 'koa-router';
 import axios from './utils/axios';
+// import { posix } from 'upath';
 let router =  new Router({prefix:'/search'})
 
-//搜索列表
+//搜索框列表
 router.get('/top',async (ctx)=>{
    let {status, data:{top}} = await axios.get('http://cp-tools.cn/search/top',{
       params:{
@@ -35,5 +36,29 @@ router.get('/hotPlace',async (ctx)=>{
    }
 })
 
+
+//推荐列表
+router.get('/artistic',async(ctx)=>{
+    let {status,data:{
+        count,
+        pois
+    }} = await axios.get('http://cp-tools.cn/search/resultsByKeywords',{
+        params:{
+            keyword:ctx.query.keyword,
+            city: ctx.query.city
+        }
+    })
+    if(status===200){
+      ctx.body={
+        count,
+        pois
+      }
+    }else{
+        ctx.body={
+            count:[],
+            pois:[]
+          } 
+    }
+})
 
 export default router
