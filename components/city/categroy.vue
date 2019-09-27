@@ -12,7 +12,7 @@
          :key = "item.title"
        >
          <dt :id="'city-'+item.title">{{ item.title }}</dt>
-          <dd><span v-for="c in item.city" :key="c">{{ c }}</span></dd> 
+          <dd><span v-for="c in item.city" :key="c">{{ c.replace('市','') }}</span></dd> 
        </dl>
     </div>
 </template>
@@ -62,8 +62,8 @@ export default {
         for(let [k,v] of Object.entries(d)){
            blocks.push({
             title:k.toUpperCase(),
-            city:v
-          })
+            city:v 
+           })
         }
         blocks.sort((a,b)=>a.title.charCodeAt(0)-b.title.charCodeAt(0))
         self.block=blocks

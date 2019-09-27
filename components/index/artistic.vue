@@ -9,20 +9,21 @@
 			 :keyword="list.keyword"
 			 :class="{active:list.kind===kind}"	
 			 >
-        {{ list.name }}
-			</dd>
-			
+               {{ list.name }}
+			</dd>	
 		</dl> 
 		<ul class="ibody">
-			<li v-for="(item, index) in cur" :key="index">
-          <el-card :body-style="{padding:'0px'}">
-           <img :src="item.img">
-			<div class="cbody">
-             <p class="title">{{ item.title }}</p>
-			 <p class="pos">{{ item.pos }}</p>
-			 <p class="price,">￥{{ item.price }}<span>/起</span></p>
-				 </div>
-			 </el-card>
+			<li v-for="(item, index) in cur" :key="index"> 
+			  <el-card :body-style="{padding:'0px'}">
+				  <a :href="item.url">
+					<img :src="item.img">
+				  </a>
+					<div class="cbody">
+					<p class="title">{{ item.title }}</p>
+					<p class="pos">{{ item.pos }}</p>
+					<p class="price,">￥{{ item.price }}<span>/起</span></p>
+					</div>
+				</el-card>
  			</li>
 		</ul>
 	</div>	
@@ -62,143 +63,89 @@ export default {
 		}
 	 ],
      list:{
-			all:[
-						{
-							img:'https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png',
-							title:'汉堡1',
-							pos:'地址1',
-							price:'25',
-							url:'//abc.com'
-						},{
-							img:'https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png',
-							title:'汉堡2',
-							pos:'地址2',
-							price:'25',
-							url:'//abc.com'
-						},{
-							img:'https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png',
-							title:'汉堡3',
-							pos:'地址3',
-							price:'25',
-							url:'//abc.com'
-						}
+			 all:[
+
+			// 			{
+			// 				img:'https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png',
+			// 				title:'汉堡1',
+			// 				pos:'地址1',
+			// 				price:'25',
+			// 				url:'//abc.com'
+			// 			},{
+			// 				img:'https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png',
+			// 				title:'汉堡2',
+			// 				pos:'地址2',
+			// 				price:'25',
+			// 				url:'//abc.com'
+			// 			},{
+			// 				img:'https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png',
+			// 				title:'汉堡3',
+			// 				pos:'地址3',
+			// 				price:'25',
+			// 				url:'//abc.com'
+			// 			}
 					],
-					part:[
-						{
-							img:'https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png',
-							title:'标题1',
-							pos:'地址1',
-							price:'25',
-							url:'//abc.com'
-						},{
-							img:'https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png',
-							title:'标题2',
-							pos:'地址2',
-							price:'25',
-							url:'//abc.com'
-						},{
-							img:'https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png',
-							title:'标题3',
-							pos:'地址3',
-							price:'25',
-							url:'//abc.com'
-						}
-					],
-					sap:[
-						{
-							img:'https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png',
-							title:'丽人1',
-							pos:'地址1',
-							price:'25',
-							url:'//abc.com'
-						},{
-							img:'https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png',
-							title:'丽人2',
-							pos:'地址2',
-							price:'25',
-							url:'//abc.com'
-						},{
-							img:'https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png',
-							title:'丽人3',
-							pos:'地址3',
-							price:'25',
-							url:'//abc.com'
-						}
-					],
-					movie:[
-						{
-							img:'https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png',
-							title:'电影演出1',
-							pos:'地址1',
-							price:'25',
-							url:'//abc.com'
-						},{
-							img:'https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png',
-							title:'电影演出2',
-							pos:'地址2',
-							price:'25',
-							url:'//abc.com'
-						},{
-							img:'https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png',
-							title:'电影演出3',
-							pos:'地址3',
-							price:'25',
-							url:'//abc.com'
-						}
-					],
-					travel:[
-						{
-							img:'https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png',
-							title:'电影演出1',
-							pos:'地址1',
-							price:'25',
-							url:'//abc.com'
-						},{
-							img:'https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png',
-							title:'电影演出2',
-							pos:'地址2',
-							price:'25',
-							url:'//abc.com'
-						},{
-							img:'https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png',
-							title:'电影演出3',
-							pos:'地址3',
-							price:'25',
-							url:'//abc.com'
-						}
-			      ]				 	 
+					part:[],
+					sap:[],
+					movie:[],
+					travel:[]				 	 
 			 }			 	 
 	  }
 	},
-	mounted () {
-		
+	async mounted () {
+		let self = this;
+		let {status,data:{count,pois}}=await self.$axios.get('/search/artistic',{
+			params:{
+				keyword:'景点',
+				city:self.$store.state.geo.position.city
+			}
+		})
+		 if(status===200&&count>0){
+			  let r = pois.filter(item=>{
+				return item.photos.length  //过滤出有图片的数组
+			  }).map(item=>{
+				  return {
+				    title:item.name,
+					pos:item.type.split(';')[0],
+					price:item.biz_ext.cost||'暂无',
+					img:item.photos[0].url,
+					url:'//abc.com'
+				  }
+			  })
+			  self.list[self.kind] = r.slice(0,9)
+		  }else{
+			  self.list[self.kind] = []
+		  }
 	},
-   methods:{
-	 async enter(e){
+    methods:{
+	  enter:async function(e){
 		let dom = e.target
 		let tag = dom.tagName.toLowerCase()
 		let self = this
 		if(tag === 'dd'){
-		  this.kind = dom.getAttribute('kind');  
-		  this.keyword = dom.getAttribute('keyword');
-		  let {status,data:{count,pois}} = await self.$axios.get('/search/artistic',{
-			  params:{
-				  keyword,
-				  city:self.$store.state.geo.position.city
-			  }
-		  })
+		   self.keyword = dom.getAttribute('keyword')
+		   self.kind = dom.getAttribute('kind')
+			let {status,data:{count,pois}}=await self.$axios.get('/search/artistic',{
+			params:{
+				keyword:self.keyword,
+				city:self.$store.state.geo.position.city
+			}
+        })
 		  if(status===200&&count>0){
-			  self.list = pois.filter(item=>{
-				  item.photos.length  //过滤出有图片的数组
+			  let r = pois.filter(item=>{
+				return item.photos.length  //过滤出有图片的数组
 			  }).map(item=>{
 				  return {
-					img:item.photos[0].url,
-					title:item.name,
-					pos:item.address,
+				    title:item.name,
+					pos:item.type.split(';')[0],
 					price:item.biz_ext.cost||'暂无',
+					img:item.photos[0].url,
 					url:'//abc.com'
 				  }
 			  })
+			  self.list[self.kind] = r.slice(0,9)
+		  }else{
+			  self.list[self.kind] = []
 		  }
 		  
 		}
@@ -206,7 +153,7 @@ export default {
 	},
 	computed:{
       cur(){
-		  // console.log(this.list[this.kind])
+		//   console.log(this.list[this.kind])
 		  return this.list[this.kind]
 		}
 	}

@@ -28,7 +28,7 @@
        <el-autocomplete
           v-model="input"
           :fetch-suggestions="querySearchAsync"
-          placeholder="请输入搜索内容"
+          placeholder="请输入搜索城市"
           @select="handleSelect"
           >
        </el-autocomplete>
@@ -36,7 +36,9 @@
 </template>
 
 <script>
-// import _ from 'lodash';
+import pyjs from 'js-pinyin'
+import _ from 'lodash';
+import { async } from 'q';
 export default {
   data(){
       return{
@@ -77,21 +79,29 @@ export default {
       } 
     },
 methods:{
-   querySearchAsync:async function(query,cb){
-      let self=this;
-
-        let {status,data:{city}}=await self.$axios.get('/geo/city')
-        if(status===200){
-          self.cities=city.map(item=>{return {
-            value:item.name
-          }})
-          cb(self.cities.filter(item => item.value.indexOf(query)>-1))
-        }else{
+   //query输入的内容，cb回调
+  //采用节流防抖 
+  querySearchAsync:_.debounce(async function(query,cb){
+     let self = this;
+     if(self.cities.length){
+       cb(self.cities.filter(item=>pyjs.getFullChars(item.value).indexOf(query) > -1))
+      //  cb(self.cities.filter(item=>item.value.indexOf(query) && pyjs.getFullChars(item.value).indexOf(query) > -1))
+     }else{
+       let {status,data:{city}} = await self.$axios.get('/geo/city')
+       if(status===200){
+         self.cities = city.map(item=>{
+            return {
+              value:item.name
+            }
+         })
+        cb(self.cities.filter(item=>pyjs.getFullChars(item.value).indexOf(query) > -1))
+        // cb(self.cities.filter(item=>item.value.indexOf(query) && pyjs.getFullChars(item.value).indexOf(query) > -1))
+       }else{
           cb([])
-        }
-    
-    },
-    handleSelect:function(item){
+       }
+     }
+  },200),
+  handleSelect:function(item){
       console.log(item.value);
     }
   }
