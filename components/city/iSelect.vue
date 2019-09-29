@@ -132,7 +132,8 @@ methods:{
           city:item.label
          }
       )
-      localStorage.setItem('newCity', JSON.stringify(item.value));
+      localStorage.setItem('newCity', JSON.stringify(item.label));
+      // this.$store.commit('geo/setnewCity', item.label)
       this.$router.push('/')
       
     }

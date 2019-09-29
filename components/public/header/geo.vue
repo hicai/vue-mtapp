@@ -1,7 +1,7 @@
 <template>
    <div class="m-geo">
 		 <i class="el-icon-location">    
-      {{cityVal}}
+      {{city}}
      </i> 
 		  <nuxt-link
       class="changeCity"
@@ -16,26 +16,24 @@ import store from '@/store'
 export default {
    data(){
      return{
-      //  cityVal:''
+       city:''
      }
    },
-   watch: {     
-    cityVal:function(){
-      if(localStorage.getItem('newCity')){
-        console.log(localStorage.getItem('newCity'))
-       return JSON.parse(localStorage.getItem('newCity'))
-     }else{
-       return this.$store.state.geo.position.city
-     } 
-    }
-   }
-  //  mounted(){
-  //    if(localStorage.getItem('newCity')){
-  //       this.city = JSON.parse(localStorage.getItem('newCity'))
-  //    }else{
-  //      this.city = this.$store.state.geo.position.city
-  //    }
+  //  methods:{
+     
+  //     if(localStorage.getItem('newCity')){
+  //         this.city = JSON.parse(localStorage.getItem('newCity'))
+  //     }else{
+  //       this.city = this.$store.state.geo.position.city
+  //     }
   //  }
+   mounted(){
+     if(localStorage.getItem('newCity')){
+        this.city = JSON.parse(localStorage.getItem('newCity'))
+     }else{
+       this.city = this.$store.state.geo.position.city
+     }
+   }
 }
 </script>
 
