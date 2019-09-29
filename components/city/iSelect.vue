@@ -3,7 +3,9 @@
        <span class="name">按省份选择:</span> 
        <el-select 
          v-model="pvalue" 
-         placeholder="省份">
+         placeholder="省份"
+         @change="setProv"
+         >
            <el-option
               v-for="item in province"
               :key="item.value"
@@ -15,15 +17,19 @@
        <el-select
          v-model="cvalue"  
          :disabled="!city.length" 
-         placeholder="城市">
+         placeholder="城市"
+       
+         >
            <el-option
               v-for="item in city"
               :key="item.value"
               :label="item.label"
-              :value="item.value"
+              :value="item.value"    
            >
+               <span @click="changeCity(item)">{{item.label}}</span>
            </el-option>
        </el-select>  
+
        <span class="search">直接搜索:</span> 
        <el-autocomplete
           v-model="input"
@@ -36,6 +42,7 @@
 </template>
 
 <script>
+// import { mapMutations } from 'vuex'
 import pyjs from 'js-pinyin'
 import _ from 'lodash';
 import { async } from 'q';
@@ -48,6 +55,8 @@ export default {
          city:[],
          input:'',
          cities: [], 
+         value8:'',
+      
       }
   },
   watch: {
@@ -103,9 +112,32 @@ methods:{
   },200),
   handleSelect:function(item){
       console.log(item.value);
+      // store.commit('geo/setPosition', item.value)
+      // this.$router.push({path: '/'});
+     
+    },
+   currentSel:function(selVal){
+     this.name = selVal.label;
+     console.log("选择的name为：" + this.name);  
+    },
+    setProv:async function(selVal){
+      this.selVal = selVal.label;
+      // console.log(this.selVal)
+    },
+
+    changeCity:function(item){
+      console.log("值"+ item.label + item.value)
+      this.$store.commit('geo/setPosition', 
+        { province:item.value,
+          city:item.label
+         }
+      )
+      localStorage.setItem('newCity', JSON.stringify(item.value));
+      this.$router.push('/')
+      
     }
   }
-}
+} 
 </script>
 
 <style lang="scss">

@@ -3,6 +3,7 @@ const state = () => ({position: {}})
 const mutations = {
     setPosition(state,val){
     state.position = val
+    console.log("store"+state.position)
     }
 }
 const actions = {

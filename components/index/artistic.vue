@@ -137,7 +137,7 @@ export default {
 			  }).map(item=>{
 				  return {
 				    title:item.name,
-					pos:item.type.split(';')[0],
+					pos:item.type.split(';')[0], //取第一个标签
 					price:item.biz_ext.cost||'暂无',
 					img:item.photos[0].url,
 					url:'//abc.com'
