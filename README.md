@@ -23,6 +23,7 @@ For detailed explanation on how things work, checkout [Nuxt.js docs](https://nux
 
 ## 功能
  - 用户登录注册退出
+ - 验证码接收验证
  - 登录后返回当前城市定位 
  - 全国城市根据拼音首字母分类
  - 切换城市
