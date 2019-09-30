@@ -100,6 +100,7 @@ methods:{
        if(status===200){
          self.cities = city.map(item=>{
             return {
+              province:item.province,
               value:item.name
             }
          })
@@ -111,9 +112,13 @@ methods:{
      }
   },200),
   handleSelect:function(item){
-      console.log(item.value);
-      // store.commit('geo/setPosition', item.value)
-      // this.$router.push({path: '/'});
+    
+      this.$store.commit('geo/setPosition', 
+        { province:item.province,
+          city:item.value
+         })
+      console.log('搜索：'+item.province+item.value)   
+      this.$router.push({path: '/'});
      
     },
    currentSel:function(selVal){
@@ -133,7 +138,7 @@ methods:{
          }
       )
       localStorage.setItem('newCity', JSON.stringify(item.label));
-      // this.$store.commit('geo/setnewCity', item.label)
+      // this.$store.commit('geo/setnewCity', item)
       this.$router.push('/')
       
     }
