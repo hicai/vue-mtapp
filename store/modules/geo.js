@@ -1,11 +1,13 @@
-const state = {
-  position: {},
-  newCity:''
-}
+// const state = {
+//   position: {},
+//   // newCity:''
+// }
+const state = () => ({position:{}})
+
 const mutations = {
     setPosition(state,val){
     state.position = val
-    console.log("store"+state.position)
+    console.log(state.position)
     }
     // ,
     // setnewCity(state,val){

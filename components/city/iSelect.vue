@@ -4,7 +4,7 @@
        <el-select 
          v-model="pvalue" 
          placeholder="省份"
-         @change="setProv"
+        
          >
            <el-option
               v-for="item in province"
@@ -12,6 +12,7 @@
               :label="item.label"
               :value="item.value"
            >
+             <span @click="changeProv(item)">{{item.label}}</span>
            </el-option>
        </el-select> 
        <el-select
@@ -55,7 +56,7 @@ export default {
          city:[],
          input:'',
          cities: [], 
-         value8:'',
+         selVal:'',
       
       }
   },
@@ -69,7 +70,6 @@ export default {
                 value:item.id,
                 label:item.name
              }
-             console.log(self.city)
            })
            self.cvalue = ''
         }
@@ -94,7 +94,6 @@ methods:{
      let self = this;
      if(self.cities.length){
        cb(self.cities.filter(item=>pyjs.getFullChars(item.value).indexOf(query) > -1))
-      //  cb(self.cities.filter(item=>item.value.indexOf(query) && pyjs.getFullChars(item.value).indexOf(query) > -1))
      }else{
        let {status,data:{city}} = await self.$axios.get('/geo/city')
        if(status===200){
@@ -104,39 +103,55 @@ methods:{
             }
          })
         cb(self.cities.filter(item=>pyjs.getFullChars(item.value).indexOf(query) > -1))
-        // cb(self.cities.filter(item=>item.value.indexOf(query) && pyjs.getFullChars(item.value).indexOf(query) > -1))
        }else{
           cb([])
        }
      }
   },200),
-  handleSelect:function(item){
-      console.log(item.value);
-      // store.commit('geo/setPosition', item.value)
-      // this.$router.push({path: '/'});
-     
-    },
-   currentSel:function(selVal){
-     this.name = selVal.label;
-     console.log("选择的name为：" + this.name);  
-    },
-    setProv:async function(selVal){
-      this.selVal = selVal.label;
-      // console.log(this.selVal)
-    },
 
-    changeCity:function(item){
-      console.log("值"+ item.label + item.value)
-      this.$store.commit('geo/setPosition', 
-        { province:item.value,
-          city:item.label
-         }
-      )
-      localStorage.setItem('newCity', JSON.stringify(item.label));
-      // this.$store.commit('geo/setnewCity', item.label)
-      this.$router.push('/')
+changeProv:function(item){
+  let self = this;
+  self.selVal = item.label
+   console.log("省份"+ self.selVal)
+},
+ changeCity:async function(item){
+      let self = this;
+       //热门城市显示
+      //let hotCity = item.label.replace('市','')
+      const {status,data:{result}} = await this.$axios.get('search/hotPlace',{
+        params:{
+            city:item.label==="市辖区"?self.selVal.replace('市',''):item.label.replace('市','')
+          }
+      })
+
+      this.$store.commit('hot/setHot',status===200?result:[])
+      console.log("市"+ item.label)
       
-    }
+      this.$store.commit('geo/setPosition', {
+        province:self.selVal,
+        city:item.label==="市辖区"?self.selVal:item.label
+       })
+      localStorage.setItem('newCity', JSON.stringify(item.label));
+      this.$router.push({path:'/'}) 
+      
+       
+    },
+    handleSelect:async function(item){
+      //城市定位显示
+      this.$store.commit('geo/setPosition',{
+        city:item.value
+      })
+      this.$router.push({path: '/'});
+      
+      //热门城市显示
+      // const {status,data:{result}} = await this.$axios.get('search/hotPlace',{
+      //   params:{
+      //       city:item.value.replace('市','')
+      //     }
+      // })
+      // this.$store.commit('hot/setHot',status===200?result:[])
+
+    },
   }
 } 
 </script>

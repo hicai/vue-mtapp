@@ -1,9 +1,10 @@
 <template>
   <div class="page-login">
       <div class="login-header">
-      <a
-        href="/"
-        class="logo"/>
+      <nuxt-link to="/">
+         <a class="logo"/>
+      </nuxt-link>  
+     
       </div>     
     <div class="form">
       <h4
