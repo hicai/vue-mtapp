@@ -1,7 +1,11 @@
 <template>
    <div class="m-geo">
 		 <i class="el-icon-location">    
+<<<<<<< HEAD
       {{cityVal}}
+=======
+     {{$store.state.geo.position.city}}
+>>>>>>> ebca570148af34b4fb30d79105df59526261ed13
      </i> 
 		  <nuxt-link
       class="changeCity"
