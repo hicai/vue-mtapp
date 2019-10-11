@@ -2,12 +2,14 @@
    <div class="page-register">
      <div class="header-box">
 			 <div class="header">
-         <a href="/" class="site-logo"></a>
+         <nuxt-link to="/">
+          <span class="site-logo"></span>
+         </nuxt-link>
 				 <span class="login">
 					 已有美团账号
-					 <a href="/login">
-					  <el-button type="primary">登录</el-button>
-					 </a>
+             <nuxt-link to="/login">
+					    <el-button type="primary">登录</el-button>
+             </nuxt-link>
 				 </span>
 			 </div>     
 		 </div>

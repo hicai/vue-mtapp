@@ -4,9 +4,10 @@
        <ul>
           <li 
           v-for="item in hotCity"
-          :key="item.id"
-          >
-              {{item.name==="市辖区"?item.province:item.name}}   
+          :key="item.id"> 
+            <a @click="changcity(item)">
+              {{item.name==="市辖区"?item.province:item.name}} 
+            </a>   
           </li> 
        </ul>
     </div>
@@ -25,6 +26,15 @@ export default {
      if(status === 200){
          seft.hotCity = hots
      }  
+   },
+   methods: {
+      changcity:function(item){
+        let seft = this;
+        this.$store.commit('geo/setPosition',{
+           city:item.name==="市辖区"?item.province.replace('市',''):item.name.replace('市','')
+        })
+        this.$router.push({path:'/'})
+      }
    }
 }
 </script>

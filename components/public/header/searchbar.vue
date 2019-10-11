@@ -21,7 +21,7 @@
 					     v-if="ifHotPlace">
                     <dt>热门搜索</dt>
 						 <dd 
-						   v-for="(item,idx) in $store.state.hot.hotPlace.slice(0,4)"
+						   v-for="(item,idx) in $store.state.hot.hotPlace.slice(0,5)"
 							 :key="idx"
 							 >
 						   {{ item.name }}	 
@@ -42,7 +42,7 @@
 				 </div>
 				 <p class="suggest">
 					 <a href="#"
-					   v-for="(item,index) in $store.state.hot.hotPlace.slice(0,4)"
+					   v-for="(item,index) in $store.state.hot.hotPlace.slice(0,5)"
 					   :key = "index"
 					 >{{ item.name }}
 					 </a>

@@ -60,7 +60,7 @@ export default {
       
       }
   },
-  watch: {
+  watch:{
    pvalue: async function(newPvalue){
          let self = this;
          let {status,data:{city}} = await this.$axios.get(`/geo/province/${newPvalue}`)
@@ -103,23 +103,13 @@ methods:{
               value:item.name
             }
          })
-        cb(self.cities.filter(item=>pyjs.getFullChars(item.value).indexOf(query) > -1))
+       cb(self.cities.filter(item=>pyjs.getFullChars(item.value).indexOf(query) > -1))
        }else{
           cb([])
        }
      }
   },200),
-<<<<<<< HEAD
-  handleSelect:function(item){
-    
-      this.$store.commit('geo/setPosition', 
-        { province:item.province,
-          city:item.value
-         })
-      console.log('搜索：'+item.province+item.value)   
-      this.$router.push({path: '/'});
-     
-    },
+
    currentSel:function(selVal){
      this.name = selVal.label;
      console.log("选择的name为：" + this.name);  
@@ -128,8 +118,6 @@ methods:{
       this.selVal = selVal.label;
       // console.log(this.selVal)
     },
-=======
->>>>>>> ebca570148af34b4fb30d79105df59526261ed13
 
 changeProv:function(item){
   let self = this;
@@ -139,7 +127,6 @@ changeProv:function(item){
  changeCity:async function(item){
       let self = this;
        //热门城市显示
-      //let hotCity = item.label.replace('市','')
       const {status,data:{result}} = await this.$axios.get('search/hotPlace',{
         params:{
             city:item.label==="市辖区"?self.selVal.replace('市',''):item.label.replace('市','')
@@ -148,36 +135,30 @@ changeProv:function(item){
 
       this.$store.commit('hot/setHot',status===200?result:[])
       console.log("市"+ item.label)
-      
       this.$store.commit('geo/setPosition', {
         province:self.selVal,
         city:item.label==="市辖区"?self.selVal:item.label
        })
-      localStorage.setItem('newCity', JSON.stringify(item.label));
-<<<<<<< HEAD
-      // this.$store.commit('geo/setnewCity', item)
-      this.$router.push('/')
-=======
+      // localStorage.setItem('newCity', JSON.stringify(item.label));
       this.$router.push({path:'/'}) 
->>>>>>> ebca570148af34b4fb30d79105df59526261ed13
       
        
     },
     handleSelect:async function(item){
+     //热门城市显示
+      const {status,data:{result}} = await this.$axios.get('search/hotPlace',{
+        params:{
+            city:item.value.replace('市','')
+          }
+      })
+      this.$store.commit('hot/setHot',status===200?result:[])
+
       //城市定位显示
       this.$store.commit('geo/setPosition',{
         city:item.value
       })
-      this.$router.push({path: '/'});
+      this.$router.push({path:'/'})
       
-      //热门城市显示
-      // const {status,data:{result}} = await this.$axios.get('search/hotPlace',{
-      //   params:{
-      //       city:item.value.replace('市','')
-      //     }
-      // })
-      // this.$store.commit('hot/setHot',status===200?result:[])
-
     },
   }
 } 

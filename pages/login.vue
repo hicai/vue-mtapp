@@ -51,6 +51,10 @@ export default {
   },
   methods: {
       login(){
+         if(this.username===''&&this.password===''){
+           this.error = '请输入账号密码'
+           return
+         }
          this.$axios.post("/users/signin",{
             username:window.encodeURIComponent(this.username),
             password:CryptoJS.MD5(this.password).toString()
@@ -60,6 +64,7 @@ export default {
                    this.$router.push('/')
                    this.username = ""
                    this.password = ""
+                   this.error=""
                }else{
                    this.error = res.data.msg
                }
