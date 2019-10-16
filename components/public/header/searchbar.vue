@@ -14,17 +14,20 @@
 						@blur="blur"
 						@input="input"
 					 >
-            <el-button slot="append" icon="el-icon-search"></el-button>
+                <el-button slot="append" icon="el-icon-search"></el-button>
 					 </el-input>
 					 <!-- 热门推荐 -->
-            <dl class="hotPlace" 
+                   <dl class="hotPlace" 
 					     v-if="ifHotPlace">
                     <dt>热门搜索</dt>
 						 <dd 
 						   v-for="(item,idx) in $store.state.hot.hotPlace.slice(0,5)"
 							 :key="idx"
 							 >
-						   {{ item.name }}	 
+							<a :href="'/product?keyword='+encodeURIComponent(item.name)">
+							  {{ item.name }}	
+							</a> 
+						    
 						 </dd>
 						 
 					 </dl>

@@ -30,7 +30,6 @@
                <span @click="changeCity(item)">{{item.label}}</span>
            </el-option>
        </el-select>  
-
        <span class="search">直接搜索:</span> 
        <el-autocomplete
           v-model="input"
@@ -93,7 +92,11 @@ methods:{
   querySearchAsync:_.debounce(async function(query,cb){
      let self = this;
      if(self.cities.length){
-       cb(self.cities.filter(item=>pyjs.getFullChars(item.value).indexOf(query) > -1))
+       cb(self.cities.filter(
+         (item)=>{
+           return pyjs.getFullChars(item.value).toLowerCase().indexOf(query)>-1||item.value.indexOf(query)>-1 //输入拼音和汉字都能过滤
+         }
+       ))
      }else{
        let {status,data:{city}} = await self.$axios.get('/geo/city')
        if(status===200){
@@ -103,7 +106,11 @@ methods:{
               value:item.name
             }
          })
-       cb(self.cities.filter(item=>pyjs.getFullChars(item.value).indexOf(query) > -1))
+           cb(self.cities.filter(
+           (item)=>{
+           return pyjs.getFullChars(item.value).toLowerCase().indexOf(query)>-1||item.value.indexOf(query)>-1 
+          }
+       ))
        }else{
           cb([])
        }
@@ -141,7 +148,6 @@ changeProv:function(item){
        })
       // localStorage.setItem('newCity', JSON.stringify(item.label));
       this.$router.push({path:'/'}) 
-      
        
     },
     handleSelect:async function(item){
