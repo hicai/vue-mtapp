@@ -25,7 +25,9 @@ export default {
     List,
     Amap,
   },
-  props: {},
+  props: {
+    
+  },
   data() {
     return {
        types:[
@@ -51,7 +53,8 @@ export default {
            name:'主题',
            module:'选项'
          }
-       ]
+       ],
+       keyword:''
     };
   },
   methods: {},
