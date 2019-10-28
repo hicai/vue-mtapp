@@ -37,3 +37,10 @@ For detailed explanation on how things work, checkout [Nuxt.js docs](https://nux
  - 订单
  - 购物车
 
+编码问题
+encodeURIComponent() 函数可把字符串作为 URI 组件进行编码。
+
+产品列表获取数据
+(asyncData方法是在组件 初始化 前被调用的，所以在方法内是没有办法通过 this 来引用组件的实例对象)
+
+ 
