@@ -59,6 +59,6 @@ router.get('/artistic',async(ctx)=>{
             pois:[]
           } 
     }
-})
+}) 
 
 export default router
