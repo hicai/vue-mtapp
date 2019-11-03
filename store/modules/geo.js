@@ -9,12 +9,6 @@ const mutations = {
     state.position = val
     console.log(state.position)
     }
-    // ,
-    // setnewCity(state,val){
-    //   state.newCity = val
-    //   localStorage.setItem('newCity', JSON.stringify(val));
-    //   console.log("nndd"+val)
-    // }
 }
 
 const actions = {

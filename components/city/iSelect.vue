@@ -30,7 +30,6 @@
                <span @click="changeCity(item)">{{item.label}}</span>
            </el-option>
        </el-select>  
-
        <span class="search">直接搜索:</span> 
        <el-autocomplete
           v-model="input"
@@ -60,7 +59,7 @@ export default {
       
       }
   },
-  watch: {
+  watch:{
    pvalue: async function(newPvalue){
          let self = this;
          let {status,data:{city}} = await this.$axios.get(`/geo/province/${newPvalue}`)
@@ -93,21 +92,39 @@ methods:{
   querySearchAsync:_.debounce(async function(query,cb){
      let self = this;
      if(self.cities.length){
-       cb(self.cities.filter(item=>pyjs.getFullChars(item.value).indexOf(query) > -1))
+       cb(self.cities.filter(
+         (item)=>{
+           return pyjs.getFullChars(item.value).toLowerCase().indexOf(query)>-1||item.value.indexOf(query)>-1 //输入拼音和汉字都能过滤
+         }
+       ))
      }else{
        let {status,data:{city}} = await self.$axios.get('/geo/city')
        if(status===200){
          self.cities = city.map(item=>{
             return {
+              province:item.province,
               value:item.name
             }
          })
-        cb(self.cities.filter(item=>pyjs.getFullChars(item.value).indexOf(query) > -1))
+           cb(self.cities.filter(
+           (item)=>{
+           return pyjs.getFullChars(item.value).toLowerCase().indexOf(query)>-1||item.value.indexOf(query)>-1 
+          }
+       ))
        }else{
           cb([])
        }
      }
   },200),
+
+   currentSel:function(selVal){
+     this.name = selVal.label;
+     console.log("选择的name为：" + this.name);  
+    },
+    setProv:async function(selVal){
+      this.selVal = selVal.label;
+      // console.log(this.selVal)
+    },
 
 changeProv:function(item){
   let self = this;
@@ -117,7 +134,6 @@ changeProv:function(item){
  changeCity:async function(item){
       let self = this;
        //热门城市显示
-      //let hotCity = item.label.replace('市','')
       const {status,data:{result}} = await this.$axios.get('search/hotPlace',{
         params:{
             city:item.label==="市辖区"?self.selVal.replace('市',''):item.label.replace('市','')
@@ -126,31 +142,29 @@ changeProv:function(item){
 
       this.$store.commit('hot/setHot',status===200?result:[])
       console.log("市"+ item.label)
-      
       this.$store.commit('geo/setPosition', {
         province:self.selVal,
         city:item.label==="市辖区"?self.selVal:item.label
        })
-      localStorage.setItem('newCity', JSON.stringify(item.label));
+      // localStorage.setItem('newCity', JSON.stringify(item.label));
       this.$router.push({path:'/'}) 
-      
        
     },
     handleSelect:async function(item){
+     //热门城市显示
+      const {status,data:{result}} = await this.$axios.get('search/hotPlace',{
+        params:{
+            city:item.value.replace('市','')
+          }
+      })
+      this.$store.commit('hot/setHot',status===200?result:[])
+
       //城市定位显示
       this.$store.commit('geo/setPosition',{
         city:item.value
       })
-      this.$router.push({path: '/'});
+      this.$router.push({path:'/'})
       
-      //热门城市显示
-      // const {status,data:{result}} = await this.$axios.get('search/hotPlace',{
-      //   params:{
-      //       city:item.value.replace('市','')
-      //     }
-      // })
-      // this.$store.commit('hot/setHot',status===200?result:[])
-
     },
   }
 } 

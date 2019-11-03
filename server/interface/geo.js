@@ -13,7 +13,6 @@ router.get('/getPosition', async(ctx)=>{
       city
     }
   }= await axios.get(`http://cp-tools.cn/geo/getPosition`)
-   
   if (status === 200) {
     ctx.body = {
       province,
