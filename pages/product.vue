@@ -4,10 +4,10 @@
       <el-col :span="19">
          <crumb :keyword="keyword"></crumb>
          <categroy :types="types" :areas="areas"></categroy>
-         <list></list>
+         <list :list="list"></list>
       </el-col>
       <el-col :span="5">
-         <amap></amap>
+         <amap :width="230" :height="290" :point="point"></amap>
       </el-col>
     </el-row> 
   </div>
@@ -25,36 +25,14 @@ export default {
     List,
     Amap,
   },
-  props: {
-    
-  },
+
   data() {
     return {
-       types:[
-         {
-           name:'主题',
-           module:'选项'
-         }, {
-           name:'主题',
-           module:'选项'
-         }, {
-           name:'主题',
-           module:'选项'
-         }
-       ],
-       areas:[
-         {
-           name:'主题',
-           module:'选项'
-         }, {
-           name:'主题',
-           module:'选项'
-         }, {
-           name:'主题',
-           module:'选项'
-         }
-       ],
-       keyword:''
+       keyword:'',
+       types:[],
+       areas:[],
+       list:[],
+       point:[]
     };
   },
   methods: {},
