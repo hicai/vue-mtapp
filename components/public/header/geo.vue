@@ -9,7 +9,7 @@
       to="/changeCity">切换城市</nuxt-link>
       [佛山 ,深圳 ,珠海]
 	 </div>
-</template>
+</template>  
 
 <script>
 import { async } from 'q'

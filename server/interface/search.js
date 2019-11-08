@@ -23,7 +23,7 @@ router.get('/top',async (ctx)=>{
     }
 })
 
-//热门搜索
+//热门搜索xx
 router.get('/hotPlace',async (ctx)=>{
     let city = ctx.store
     ? ctx.store.geo.position.city
@@ -35,7 +35,7 @@ router.get('/hotPlace',async (ctx)=>{
     })
    ctx.body={
      result: status === 200?result:[]
-   }
+   }  
 })
 
 

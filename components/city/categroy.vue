@@ -7,7 +7,7 @@
           </dd> 
        </dl>
        <!-- 按拼音分类城市 -->
-       <dl class="m-categroy-section"
+       <dl class="m-categroy-section"  
          v-for="item in block"
          :key = "item.title"
        >

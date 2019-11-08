@@ -43,7 +43,7 @@ module.exports = {
   ** Build configuration
   */
   axios:{
- 
+  
   },
   build: {
     transpile: [/^element-ui/],

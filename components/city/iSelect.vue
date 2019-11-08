@@ -150,8 +150,8 @@ changeProv:function(item){
       this.$router.push({path:'/'}) 
        
     },
-    handleSelect:async function(item){
-     //热门城市显示
+    handleSelect:async function(item){  
+     //搜索框热门城市显示
       const {status,data:{result}} = await this.$axios.get('search/hotPlace',{
         params:{
             city:item.value.replace('市','')

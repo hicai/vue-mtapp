@@ -17,7 +17,7 @@
 export default {
    data(){
     return{
-       hotCity:[] 
+       hotCity:[]   
     }
    },
    async mounted(){
@@ -31,7 +31,7 @@ export default {
    methods: {
       changcity:async function(item){
         let seft = this;
-       //热门切换显示
+       //搜索框热门城市切换显示
         const {status,data:{result}} = await this.$axios.get('search/hotPlace',{
            params:{
               city:item.name==="市辖区"?item.province.replace('市',''):item.name.replace('市','')
