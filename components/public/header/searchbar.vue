@@ -19,7 +19,7 @@
 					 <!-- 热门推荐 -->
                    <dl class="hotPlace" 
 					     v-if="ifHotPlace">
-                    <dt>热门搜索</dt>
+                <dt>热门搜索</dt>
 						 <dd 
 						   v-for="(item,idx) in $store.state.hot.hotPlace.slice(0,5)"
 							 :key="idx"
@@ -115,12 +115,12 @@ export default {
 			  let city=self.$store.state.geo.position.city.replace('市','')
 			  self.searchList = []
 			  let {status,data:{top}} = await self.$axios.get('/search/top',{
-                 params:{
+         params:{
 					input: self.search,
 					city
 				 }
 			  }) 		 
-              self.searchList = top.slice(0,10)      
+        self.searchList = top.slice(0,10)      
 		},200)
 		  
  

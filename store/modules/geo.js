@@ -3,7 +3,7 @@ const state = () => ({position:{}})
 const mutations = {
     setPosition(state,val){
     state.position = val
-    // console.log("切换城市"+state.position.city)
+    // console.log("切换城市"+state.position.city) 
     }
 }
 

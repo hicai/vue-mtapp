@@ -1,3 +1,5 @@
+
+
 <template>
   <div class="page-product">
     <el-row>
@@ -48,3 +50,24 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/css/products/index.scss";
 </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
