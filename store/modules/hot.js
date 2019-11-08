@@ -1,8 +1,5 @@
 //热门推荐搜索
-const state = {
-    hotPlace:[]
-}
-
+const state = () => ({ hotPlace: []})
 const mutations = {
     setHot(state,val){
         state.hotPlace = val

@@ -3,11 +3,17 @@
     <el-row>
       <el-col :span="19">
          <crumb :keyword="keyword"></crumb>
-         <categroy :types="types" :areas="areas"></categroy>
+         <categroy 
+         :types="types" 
+         :areas="areas"></categroy>
          <list :list="list"></list>
       </el-col>
       <el-col :span="5">
-         <amap :width="230" :height="290" :point="point"></amap>
+         <amap 
+          v-if="point.length"
+          :width="230" 
+          :height="290" 
+          :point="point"></amap>
       </el-col>
     </el-row> 
   </div>

@@ -26,13 +26,22 @@ export default {
      if(status === 200){
          seft.hotCity = hots
      }  
+   //   
    },
    methods: {
-      changcity:function(item){
+      changcity:async function(item){
         let seft = this;
+       //热门切换显示
+        const {status,data:{result}} = await this.$axios.get('search/hotPlace',{
+           params:{
+              city:item.name==="市辖区"?item.province.replace('市',''):item.name.replace('市','')
+           }
+        }) 
+        this.$store.commit('hot/setHot',status===200?result:[])
         this.$store.commit('geo/setPosition',{
            city:item.name==="市辖区"?item.province.replace('市',''):item.name.replace('市','')
         })
+   
         this.$router.push({path:'/'})
       }
    }

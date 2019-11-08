@@ -144,7 +144,7 @@ changeProv:function(item){
       console.log("市"+ item.label)
       this.$store.commit('geo/setPosition', {
         province:self.selVal,
-        city:item.label==="市辖区"?self.selVal:item.label
+        city:item.label==="市辖区"?self.selVal.replace('市',''):item.label.replace('市','')
        })
       // localStorage.setItem('newCity', JSON.stringify(item.label));
       this.$router.push({path:'/'}) 
@@ -161,7 +161,7 @@ changeProv:function(item){
 
       //城市定位显示
       this.$store.commit('geo/setPosition',{
-        city:item.value
+        city:item.value.replace('市','')
       })
       this.$router.push({path:'/'})
       

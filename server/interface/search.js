@@ -25,7 +25,9 @@ router.get('/top',async (ctx)=>{
 
 //热门搜索
 router.get('/hotPlace',async (ctx)=>{
-    let city = ctx.store? city.store.state.position.city:ctx.query.city
+    let city = ctx.store
+    ? ctx.store.geo.position.city
+    : ctx.query.city
     let {status, data:{result}} = await axios.get('http://cp-tools.cn/search/hotPlace',{
        params:{
            city

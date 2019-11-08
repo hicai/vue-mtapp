@@ -32,7 +32,7 @@ module.exports = {
   */
   plugins: [
     // '@/plugins/element-ui'
-    { src: '@/plugins/element-ui', ssr: false}
+    { src: '@/plugins/element-ui',ssr:true}
   ],
   /*
   ** Nuxt.js modules
@@ -44,7 +44,7 @@ module.exports = {
   ** Build configuration
   */
   axios:{
-
+ 
   },
   build: {
     transpile: [/^element-ui/],
