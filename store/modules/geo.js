@@ -1,13 +1,9 @@
-// const state = {
-//   position: {},
-//   // newCity:''
-// }
 const state = () => ({position:{}})
 
 const mutations = {
     setPosition(state,val){
     state.position = val
-    console.log(state.position)
+    // console.log("切换城市"+state.position.city) 
     }
 }
 
@@ -16,4 +12,4 @@ const actions = {
       commit('setPosition', position)
     }
   }
-export default {namespaced: true, state, mutations, actions}
+export default {namespaced: true, state, mutations, actions}  
