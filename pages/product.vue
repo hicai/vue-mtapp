@@ -1,5 +1,3 @@
-
-
 <template>
   <div class="page-product">
     <el-row>

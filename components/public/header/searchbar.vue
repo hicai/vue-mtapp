@@ -38,17 +38,20 @@
 						   v-for="(item,index) in searchList"
 							 :key="index"
 							 >
-						   {{ item.name }}	 
+							 <a :href="'/product?keyword='+encodeURIComponent(item.name)">
+						   {{ item.name }}	
+						   </a> 
 						 </dd>
 					 </dl>
 					 <!-- 菜单 -->
 				 </div>
 				 <p class="suggest">
-					 <a href="#"
-					   v-for="(item,index) in $store.state.hot.hotPlace.slice(0,5)"
-					   :key = "index"
-					 >{{ item.name }}
-					 </a>
+					<a 
+					v-for="(item,idx) in $store.state.hot.hotPlace.slice(0,5)"
+					:key="idx"
+					:href="'/product?keyword='+encodeURIComponent(item.name)">
+							  {{ item.name }}	
+							</a> 
 				 </p>
 				  <ul class="nav">
           <li><nuxt-link
