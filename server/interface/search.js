@@ -63,4 +63,20 @@ router.get('/artistic',async(ctx)=>{
     }
 }) 
 
+//列表点击搜索
+router.get('/resultsByKeywords',async(ctx)=>{
+    let {status,data:{
+        count,
+        pois 
+    }} = await axios.get("http://cp-tools.cn/search/resultsByKeywords",{
+        params:{
+            keyword:ctx.query.keyword,
+            city: ctx.query.city
+        }
+    })
+    ctx.body = {
+        count:status===200? count:0,
+        pois:status===200? pois:[]
+    }
+})
 export default router

@@ -9,11 +9,11 @@
          <list :list="list"></list>
       </el-col>
       <el-col :span="5">
-         <amap 
+         <!-- <amap 
           v-if="point.length"
           :width="230" 
           :height="290" 
-          :point="point"></amap>
+          :point="point"></amap> -->
       </el-col>
     </el-row> 
   </div>
@@ -31,7 +31,6 @@ export default {
     List,
     Amap,
   },
-
   data() {
     return {
        keyword:'',
@@ -41,8 +40,11 @@ export default {
        point:[]
     };
   },
+  async mounted() {
+     let seft = this;
+  },
   methods: {},
-  mounted() {}
+ 
 };
 </script>
 <style lang="scss" scoped>
