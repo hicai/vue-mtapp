@@ -16,7 +16,7 @@
           :point="point"></amap> -->
       </el-col>
     </el-row> 
-  </div>
+   </div>
 </template>
 
 <script>
@@ -42,8 +42,31 @@ export default {
   },
   async mounted() {
      let seft = this;
+     //面包屑接口
+     let {status,data:{
+         count,
+         point
+     }}=await ctx.$axios.get('/search/resultsByKeywords',{
+       params:{
+          keyword:cxt.query.keyword,
+          city: seft.$store.state.geo.position.city
+       }
+     })
+    //详情页 分类导航接口
+    let {status:status2,data:{
+         count,
+         point
+     }}=await ctx.$axios.get('/search/resultsByKeywords',{
+       params:{
+          keyword:cxt.query.keyword,
+          city: seft.$store.state.geo.position.city
+       }
+     })
+
   },
-  methods: {},
+  methods: {
+
+  },
  
 };
 </script>
