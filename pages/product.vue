@@ -40,30 +40,52 @@ export default {
        point:[]
     };
   },
-  async mounted() {
-     let seft = this;
-     //面包屑接口
-     let {status,data:{
-         count,
-         point
-     }}=await ctx.$axios.get('/search/resultsByKeywords',{
-       params:{
-          keyword:cxt.query.keyword,
-          city: seft.$store.state.geo.position.city
-       }
-     })
-    //详情页 分类导航接口
-    let {status:status2,data:{
-         count,
-         point
-     }}=await ctx.$axios.get('/search/resultsByKeywords',{
-       params:{
-          keyword:cxt.query.keyword,
-          city: seft.$store.state.geo.position.city
-       }
-     })
+  async asyncData(ctx) {
+      // let {status,data:{
+      //     count,
+      //     point
+      // }}=await ctx.$axios.get('/search/resultsByKeywords',{
+      //    params:{
+      //     keyword:ctx.query.keyword,
+      //     city:ctx.store.state.geo.position.city
+      //   }
+      // })
+
+      // let {status:status2,data:{areas,types}}=await ctx.$axios.get('/categroy/crumbs',{
+      //    params:{
+      //      city
+      //    }
+      // })
+      // if(status===200&&count>0&&status2===200){
+      //    return {
+      //      list:point.filter(item=>item.photos)
+      //    }
+      // }
 
   },
+  // async asyncData(ctx){
+  //    let seft = this;
+  //    //面包屑接口
+  //    let {status,data:{
+  //        count,
+  //        point
+  //    }}=await ctx.$axios.get('/search/resultsByKeywords',{
+  //      params:{
+  //         keyword:ctx.query.keyword,
+  //         city:seft.$store.state.geo.position.city
+  //      }
+  //    })
+  //   //详情页 分类导航接口
+  //   // let {status:status2,data:{
+  //   //      count,
+  //   //      point
+  //   //  }}=await ctx.$axios.get('/search/resultsByKeywords',{
+  //   //    params:{
+  //   //       keyword:cxt.query.keyword,
+  //   //       city: seft.$store.state.geo.position.city
+  //   //    }
+  //   //  })
+  // },
   methods: {
 
   },
