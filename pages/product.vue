@@ -1,5 +1,3 @@
-
-
 <template>
   <div class="page-product">
     <el-row>
@@ -18,14 +16,14 @@
           :point="point"></amap>
       </el-col>
     </el-row> 
-  </div>
+   </div>
 </template>
 
 <script>
-import Crumb from '@/components/product/crumb'
-import Categroy from '@/components/product/categroy'
-import List from '@/components/product/sort'
-import Amap from '@/components/public/map'
+import Crumb from '@/components/product/crumb.vue'
+import Categroy from '@/components/product/categroy.vue'
+import List from '@/components/product/list.vue'
+import Amap from '@/components/public/map.vue'
 export default {
   components: {
     Crumb,
@@ -33,7 +31,6 @@ export default {
     List,
     Amap,
   },
-
   data() {
     return {
        keyword:'',
@@ -43,8 +40,50 @@ export default {
        point:[]
     };
   },
-  methods: {},
-  mounted() {}
+  async asyncData(ctx) {
+      let keyword = ctx.query.keyword
+      let city = ctx.store.state.geo.position.city
+      let {status,data:{
+        count,
+        pois
+      }}=await ctx.$axios.get('/search/resultsByKeywords',{
+         params:{
+          keyword,
+          city
+        }
+      })
+
+      let {status:status2,data:{areas,types}}=await ctx.$axios.get('/categroy/crumbs',{
+         params:{
+           city
+         }
+      })
+      if(status===200&&count>0&&status2===200){
+         return {
+           list:pois.filter(item=>item.photos.length).map(item=>{
+              return {
+                 type:item.type,
+                 img:item.photos[0].url,
+                 name:item.name,
+                 address:item.address,
+                 comment: Math.floor(Math.random()*10000),
+                 rate: Number(item.biz_ext.rating),
+                 price:Number(item.biz_ext.cost),
+                 tag:item.tag,
+                 tel:item.tel,
+                 status: '可订明日',
+                 location:item.location,
+                 module:item.type.split(';')[0]
+              }
+           }),
+           keyword,
+           areas:areas.filter(item=>item.type!=='').slice(0,5),
+           types:types.filter(item=>item.type!=='').slice(0,5),
+           point: (pois.find(item=>item.location).location||'').split(',')
+         }
+      }
+  },
+
 };
 </script>
 <style lang="scss" scoped>

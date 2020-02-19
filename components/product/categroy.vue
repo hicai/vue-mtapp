@@ -4,14 +4,14 @@
       <dt>分类</dt>
       <dt>全部</dt>
       <dd v-for="(item,idx) in types" :key="idx">
-         <isSelect :title="item.name" :list="item.module"></isSelect>
+         <isSelect :title="item.type" :list="item.module"></isSelect>
       </dd>
     </dl> 
     <dl class="classic">
       <dt>区域</dt>
       <dt>全部</dt>
       <dd v-for="(item,idx) in areas" :key="idx">
-        <isSelect :title="item.name" :list="item.module"></isSelect>
+        <isSelect :title="item.type" :list="item.module"></isSelect>
       </dd>
     </dl> 
   </div>
