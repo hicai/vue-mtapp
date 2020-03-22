@@ -6,6 +6,7 @@ import Vuex from 'vuex'
 import geo from './modules/geo'
 import menu from './modules/menu'
 import hot from './modules/hot'
+import product from './modules/product'
 
 Vue.use(Vuex)
 
@@ -13,7 +14,8 @@ const store = () => new Vuex.Store({
     modules:{
         geo,
         menu,
-        hot
+        hot,
+        product
     },
     actions:{
       async nuxtServerInit({
@@ -33,6 +35,13 @@ const store = () => new Vuex.Store({
            }
          })
          commit('hot/setHot',status3===200?result:[]) 
+        //  const {state:state4,data:{list}}=await app.$axios.get('/search/resultsByKeywords',{
+        //    params:{
+        //      keyword:app.$route.params.keyword,
+        //      city:app.store.state.geo.position.city
+        //    }
+        //  })
+        //  commit('product/getProduct',state4===200?list:[])
       }
     }
   })

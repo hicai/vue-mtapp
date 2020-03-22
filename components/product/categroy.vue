@@ -3,43 +3,51 @@
     <dl class="classic">
       <dt>分类</dt>
       <dt>全部</dt>
-      <dd v-for="(item,idx) in types" :key="idx">
-         <isSelect :title="item.type" :list="item.module"></isSelect>
+      <dd
+        v-for="(item,idx) in types"
+        :key="idx">
+        <iselect
+          :name="item.type"
+          :list="item.module"/>
       </dd>
-    </dl> 
+    </dl>
     <dl class="classic">
-      <dt>区域</dt>
+      <dt>分类</dt>
       <dt>全部</dt>
-      <dd v-for="(item,idx) in areas" :key="idx">
-        <isSelect :title="item.type" :list="item.module"></isSelect>
+      <dd
+        v-for="(item,idx) in areas"
+        :key="idx">
+        <iselect
+          :name="item.type"
+          :list="item.module"/>
       </dd>
-    </dl> 
+    </dl>
   </div>
 </template>
 
 <script>
-import isSelect from './isSelect'
+import iselect from './isSelect.vue'
 export default {
   components: {
-      isSelect
+    iselect
   },
   props: {
-      types:{
-         type: Array,
-         default:[]
-      },
-      areas:{
-         type: Array,
-         default:[] 
+    types: {
+      type: Array,
+      default(){
+        return []
       }
-
+    },
+    areas: {
+      type:Array,
+      default(){
+        return []
+      }
+    }
   },
-  data() {
-    return {
-    };
-  }
-};
+}
 </script>
+
 <style lang="scss">
   .m-product-categroy{
     padding: 15px 20px 0;
@@ -55,7 +63,7 @@ export default {
     display: flex;
     padding-bottom: 10px;
     >dt{
-      width: 40px;
+      width: 80px;
       &:nth-child(2){
         border-radius: 100px;
         background: #13D1BE;

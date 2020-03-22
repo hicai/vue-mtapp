@@ -47,17 +47,17 @@ export default {
 		  kind:'part',
 		  keyword:'美食'	
 		},{
-          name:'丽人SPA',
+      name:'丽人SPA',
 		  kind:'sap',
 		  keyword:'丽人'	
 		},
 		{
-          name:'电影演出',
+      name:'电影演出',
 		  kind:'movie',
 		  keyword:'电影'		
 		},
 		{
-          name:'品质出游',
+      name:'品质出游',
 		  kind:'travel',
 		  keyword:'旅游'		
 		}

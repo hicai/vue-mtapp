@@ -106,12 +106,14 @@
           margin-top: 8px;
           height: 14px;
 
-          a {
+          li {
             color: #999;
             margin-right: 10px;
             margin-bottom: 3px;
-            display: inline-block;
+           
             font-size: 12px;
+            float: left;
+            list-style: none;
 
             &:hover {
               color: #31BBAC;

@@ -1,32 +1,30 @@
 <template>
   <div class="m-product-select">
     <dl class="tab">
-       <dt>
-         {{title}}<i class="el-icon-arrow-down el-icon--right"></i>
-       </dt>
-       <dd>
-         <span v-for="(item,index) in list" :key="index">
-            {{item}}
-         </span>
-        </dd> 
+      <dt>{{ name }}<i class="el-icon-arrow-down el-icon--right"/></dt>
+      <dd>
+        <h3>{{ name }}</h3>
+        <span
+          v-for="(item,idx) in list"
+          :key="idx">{{ item }}</span>
+      </dd>
     </dl>
   </div>
 </template>
 
 <script>
 export default {
-  components: {},
   props: {
-    title:{
-       type:String,
-       default:''
+    name: {
+      type:String,
+      default:''
     },
-    list:{
-      type:Array,
-      default:[]
+    list: {
+      type: Array,
+      default(){
+        return []
+      }
     }
-  },
-};
+  }
+}
 </script>
-<style lang="scss" scoped>
-</style>

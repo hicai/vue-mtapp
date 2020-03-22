@@ -10,49 +10,49 @@
 			<el-col :span="16" class="center">
 			   <div class="wrapper">
 					 <el-input placeholder="输入搜索内容" v-model="search"
-					    @focus="focus"
+					  @focus="focus"
 						@blur="blur"
 						@input="input"
 					 >
-                <el-button slot="append" icon="el-icon-search"></el-button>
+            <el-button slot="append" icon="el-icon-search"></el-button>
 					 </el-input>
 					 <!-- 热门推荐 -->
-                   <dl class="hotPlace" 
+            <dl class="hotPlace" 
 					     v-if="ifHotPlace">
                 <dt>热门搜索</dt>
 						 <dd 
 						   v-for="(item,idx) in $store.state.hot.hotPlace.slice(0,5)"
 							 :key="idx"
 							 >
-							<a :href="'/product?keyword='+encodeURIComponent(item.name)">
+							 <nuxt-link :to="'/product?keyword='+encodeURIComponent(item.name)">				
 							  {{ item.name }}	
-							</a> 
-						    
+							 </nuxt-link> 
 						 </dd>
 						 
 					 </dl>
 					 <!-- 相关搜索 -->
-                     <dl class="searchList"
+           <dl class="searchList"
 				    	 v-if="ifSearchList">
 						 <dd 
 						   v-for="(item,index) in searchList"
 							 :key="index"
 							 >
-							 <a :href="'/product?keyword='+encodeURIComponent(item.name)">
-						   {{ item.name }}	
-						   </a> 
+							  <nuxt-link :to="'/product?keyword='+encodeURIComponent(item.name)">				
+							  {{ item.name }}	
+							 </nuxt-link> 
 						 </dd>
 					 </dl>
 					 <!-- 菜单 -->
 				 </div>
-				 <p class="suggest">
-					<a 
+				 <div class="suggest">
+					<li 
 					v-for="(item,idx) in $store.state.hot.hotPlace.slice(0,5)"
-					:key="idx"
-					:href="'/product?keyword='+encodeURIComponent(item.name)">
+					:key="idx">
+					  <nuxt-link :to="'/product?keyword='+encodeURIComponent(item.name)">				
 							  {{ item.name }}	
-							</a> 
-				 </p>
+							 </nuxt-link> 
+						</li> 
+				 </div>
 				  <ul class="nav">
           <li><nuxt-link
             to="/"
